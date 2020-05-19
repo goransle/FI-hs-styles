@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/data.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/streamgraph.js"></script>
+</head>
+<body>
+<div id="container1"></div>
+<div id="container2"></div>
+<div id="container3"></div>
+<div id="container4"></div>
+<script>
+    /*
+https://spreadsheets.google.com/feeds/worksheets/1da82Nx3vYm14msH7oYtdYkrXoSSmsU84xlf8EMIofNg/public/basic
+*/
+
+Highcharts.chart("container1", {
+  chart: {
+    styledMode: true,
+    type: "line",
+  },
+  title: {
+    text: "Antall medlemmer FI"
+  },
+  credits: {
+    enabled: false
+  },
+  yAxis: {
+    title: null,
+    offset: 0
+  },
+  xAxis: {
+    tickInterval: 1,
+    offset: -1
+  },
+  plotOptions: {
+    chart: {
+      animation: false
+    },
+    series: {
+      marker: {
+        symbol: 'square'
+      }
+    }
+  },
+  defs: {
+    glow: {
+      tagName: 'filter',
+      id: 'glow',
+      opacity: 0.5,
+      children: [{
+        tagName: 'feGaussianBlur',
+        result: 'coloredBlur',
+        stdDeviation: 2.5
+      }, {
+        tagName: 'feMerge',
+        children: [{
+          tagName: 'feMergeNode',
+          in: 'coloredBlur'
+        }, {
+          tagName: 'feMergeNode',
+          in: 'coloredBlur'
+        }, {
+          tagName: 'feMergeNode',
+          in: 'coloredBlur'
+        }, {
+          tagName: 'feMergeNode',
+          in: 'SourceGraphic'
+        }]
+      }]
+    }
+  },
+  data: {
+    googleSpreadsheetKey: "1da82Nx3vYm14msH7oYtdYkrXoSSmsU84xlf8EMIofNg",
+    googleSpreadsheetWorksheet: 1, // fane nr 1
+    switchRowsAndColumns: true
+  }
+});
+
+Highcharts.stockChart("container2", {
+  chart: {
+    styledMode: true
+  },
+  title: {
+    text: "Aksjekurser sammenligning"
+  },
+  navigator: {
+    enabled: false
+  },
+  plotOptions: {
+    series: {
+      compare: 'percent', // 'percent' for prosentvis endring, eller 'value' for kursverdi
+      showInNavigator: true
+    }
+  },
+  data: {
+    googleSpreadsheetKey: "1da82Nx3vYm14msH7oYtdYkrXoSSmsU84xlf8EMIofNg",
+    googleSpreadsheetWorksheet: 4, // fane nr 4
+    endColumn: 5,
+    switchRowsAndColumns: true,
+    enablePolling: false, // Vil skru på automatisk innhenting av data om satt til 'true'
+    dataRefreshRate: 60 // Sekunder mellom kvar innhenting
+  }
+});
+
+Highcharts.chart("container3", {
+  chart: {
+    styledMode: true,
+    type: "line"
+  },
+  title: {
+    text: "Nedlastninger for Horde pr uke"
+  },
+  plotOptions: {
+    series: {
+      animation: {
+        duration: 5000
+      }
+    }
+  },
+  tooltip: {
+    formatter: function() {
+      return `Uke ${this.x}: <b>${this.y}</b> nedlastinger`;
+    }
+  },
+  yAxis: {
+    title: null,
+    tickInterval: 20000
+  },
+  xAxis: {
+    title: {
+      text: "Uke nr."
+    },
+    tickInterval: 5
+  },
+  data: {
+    googleSpreadsheetKey: "1da82Nx3vYm14msH7oYtdYkrXoSSmsU84xlf8EMIofNg",
+    googleSpreadsheetWorksheet: 3,
+    startColumn: 1,
+    endColumn: 2
+  }
+});
+Highcharts.chart("container4", {
+  chart: {
+    styledMode: true,
+    type: "streamgraph"
+  },
+  yAxis: {
+    visible: false,
+    startOnTick: false,
+    endOnTick: false
+  },
+  xAxis: {
+    maxPadding: 0,
+    type: 'category',
+    crosshair: true,
+    labels: {
+      align: 'left',
+      reserveSpace: false,
+      rotation: 270
+    },
+    lineWidth: 0,
+    margin: 20,
+    tickWidth: 0
+  },
+  title: {
+    text: "Medlemmer"
+  },
+  legend: {
+    enabled: false
+  },
+  data: {
+    googleSpreadsheetKey: "1da82Nx3vYm14msH7oYtdYkrXoSSmsU84xlf8EMIofNg",
+    googleSpreadsheetWorksheet: 6
+  }
+});
+
+</script>
+</body>
+</html>
