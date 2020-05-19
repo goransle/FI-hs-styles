@@ -155,19 +155,16 @@
   
   /* Titles */
   .highcharts-title {
-      fill: #fafdff;
+      fill: $neutral-color-100;
       font-size: $title-font-size;
       font-weight: 700;
   }
   .highcharts-subtitle {
-      fill: #fafdff;
+      fill: $neutral-color-100;;
   }
   
   .highcharts-axis.highcharts-xaxis{
     filter: url(#glow);
-  }
-  .highcharts-axis.highcharts-yaxis{
-    //filter: url(#glow);
   }
   
   /* Axes */

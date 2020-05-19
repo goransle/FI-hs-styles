@@ -90,13 +90,13 @@ body, html {
 
 /* Titles */
 .highcharts-title {
-  fill: #fafdff;
+  fill: #000000;
   font-size: 3em;
   font-weight: 700;
 }
 
 .highcharts-subtitle {
-  fill: #fafdff;
+  fill: #000000;
 }
 
 .highcharts-axis.highcharts-xaxis {
