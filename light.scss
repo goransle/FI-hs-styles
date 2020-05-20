@@ -15,7 +15,7 @@
    */
   
   // Colors for data series and points.
-  $colors: var(--color-b) #90ee7e #f45b5b #7798BF #aaeeee #ff0066 #eeaaee #55BF3B #DF5353 #7798BF #aaeeee;;
+  $colors: var(--color-p) #90ee7e #f45b5b #7798BF #aaeeee #ff0066 #eeaaee #55BF3B #DF5353 #7798BF #aaeeee;;
   
   
   // Chart background, point stroke for markers and columns etc
@@ -30,7 +30,7 @@
   $neutral-color-20: white !default; // Disabled texts, button strokes, crosshair etc.
   $neutral-color-10: rgba(255,255,255,0.3) !default; // Grid lines etc.
   $neutral-color-5: white !default; // Minor grid lines etc.
-  $neutral-color-3: black !default; // Tooltip backgroud, button fills, map null points.
+  $neutral-color-3: var(--color-t) !default; // Tooltip backgroud, button fills, map null points.
   
   // Colored, shades of blue by default
   $highlight-color-100: #003399 !default; // Drilldown clickable labels, color axis max color.
@@ -228,10 +228,12 @@
   
   /* Credits */
   .highcharts-credits {
+      height: 250px;
       cursor: pointer;
-      fill: $neutral-color-40;
+      fill: url("https://financeinnovation.fra1.digitaloceanspaces.com/NCE_Finance_Innovation_logo_NCE_positive_rgb.svg");
       font-size: 0.7em;
       transition: fill 250ms, font-size 250ms;
+      background-image: url("https://financeinnovation.fra1.digitaloceanspaces.com/NCE_Finance_Innovation_logo_NCE_positive_rgb.svg");
   }
   .highcharts-credits:hover {
       fill: white;

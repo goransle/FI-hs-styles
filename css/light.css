@@ -170,10 +170,12 @@ body, html {
 
 /* Credits */
 .highcharts-credits {
+  height: 250px;
   cursor: pointer;
-  fill: #999999;
+  fill: url("https://financeinnovation.fra1.digitaloceanspaces.com/NCE_Finance_Innovation_logo_NCE_positive_rgb.svg");
   font-size: 0.7em;
   transition: fill 250ms, font-size 250ms;
+  background-image: url("https://financeinnovation.fra1.digitaloceanspaces.com/NCE_Finance_Innovation_logo_NCE_positive_rgb.svg");
 }
 
 .highcharts-credits:hover {
@@ -199,12 +201,12 @@ body, html {
 
 .highcharts-tooltip-box {
   stroke-width: 1px;
-  fill: black;
+  fill: var(--color-t);
   fill-opacity: 0.85;
 }
 
 .highcharts-tooltip-box .highcharts-label-box {
-  fill: black;
+  fill: var(--color-t);
   fill-opacity: 0.85;
 }
 
@@ -268,8 +270,8 @@ g.highcharts-series,
 /* Series options */
 /* Default colors */
 .highcharts-color-0 {
-  fill: var(--color-b);
-  stroke: var(--color-b);
+  fill: var(--color-p);
+  stroke: var(--color-p);
 }
 
 .highcharts-color-1 {
@@ -712,7 +714,7 @@ circle.highcharts-legend-nav-active, circle.highcharts-legend-nav-inactive {
 }
 
 .highcharts-button {
-  fill: black;
+  fill: var(--color-t);
   stroke: white;
   cursor: default;
   stroke-width: 1px;
@@ -859,7 +861,7 @@ input.highcharts-range-selector {
 }
 
 .highcharts-null-point {
-  fill: black;
+  fill: var(--color-t);
 }
 
 /* 3d charts */
