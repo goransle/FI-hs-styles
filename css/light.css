@@ -270,23 +270,23 @@ g.highcharts-series,
 /* Series options */
 /* Default colors */
 .highcharts-color-0 {
-  fill: var(--color-p);
-  stroke: var(--color-p);
+  fill: var(--color-b);
+  stroke: var(--color-b);
 }
 
 .highcharts-color-1 {
-  fill: #90ee7e;
-  stroke: #90ee7e;
+  fill: #FF2B19;
+  stroke: #FF2B19;
 }
 
 .highcharts-color-2 {
-  fill: #f45b5b;
-  stroke: #f45b5b;
+  fill: #FFAC19;
+  stroke: #FFAC19;
 }
 
 .highcharts-color-3 {
-  fill: #7798BF;
-  stroke: #7798BF;
+  fill: #0DFF76;
+  stroke: #0DFF76;
 }
 
 .highcharts-color-4 {
