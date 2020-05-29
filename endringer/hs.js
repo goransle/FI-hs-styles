@@ -2,7 +2,7 @@ import Highcharts from 'https://code.highcharts.com/es-modules/masters/highchart
 import 'https://code.highcharts.com/es-modules/masters/modules/stock.src.js'
 import 'https://code.highcharts.com/es-modules/masters/modules/data.src.js'
 import 'https://code.highcharts.com/es-modules/masters/modules/exporting.src.js'
-import defaultOptions from '../defaultOptions.js';
+import defaultOptions from '../js/defaultOptions.js';
 
 const params = new URLSearchParams(window.location.search)
 const spreadsheet = params.get("spreadsheetID") || '1da82Nx3vYm14msH7oYtdYkrXoSSmsU84xlf8EMIofNg';

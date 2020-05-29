@@ -4,7 +4,7 @@ import 'https://code.highcharts.com/es-modules/masters/modules/exporting.src.js'
 
 const params = new URLSearchParams(window.location.search)
 const spreadsheet = params.get("spreadsheetkey") || '1da82Nx3vYm14msH7oYtdYkrXoSSmsU84xlf8EMIofNg';
-
+const spreadSheetKey = params.get("spreadsheetKey") || 1
 
 Highcharts.chart("container", {
   chart: {
@@ -40,11 +40,11 @@ Highcharts.chart("container", {
   },
   plotOptions: {
     chart: {
-      animation: false
+      animation: true
     },
     series: {
       marker: {
-        symbol: 'square'
+        symbol: 'circle'
       }
     }
   },
