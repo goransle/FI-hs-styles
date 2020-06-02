@@ -1,28 +1,13 @@
 export default {
     chart: {
       styledMode: true,
-      type: "line",
-      events:{
-        redraw: ({target: chart}) =>{
-          // Getting title from name of first column
-          chart.setTitle({text: chart.data.columns[0].name}, false)
-          const background = document.querySelector(".highcharts-background")
-          const { fill } = getComputedStyle(background);
-          if (fill === 'rgb(0, 0, 0)') {
-            chart.renderer.image('https://financeinnovation.fra1.digitaloceanspaces.com/NCE_Finance_Innovation_logo_NCE_negative_rgb.svg',
-              0, 0, 594 / 2, 432 / 2).align({ align: "left" }).add();
-          } else {
-            chart.renderer.image('https://financeinnovation.fra1.digitaloceanspaces.com/NCE_Finance_Innovation_logo_NCE_positive_rgb.svg',
-              0, 0, 594 / 2, 432 / 2).align({ align: "left" }).add();
-          }
-        }
-      }
+      type: "line"
     },
     title: {
       text: "NCE Finance Innovation"
     },
     credits: {
-      enabled: true,
+      enabled: false,
       text: "NCE Finance Innovation"
     },
     yAxis: {
@@ -30,7 +15,7 @@ export default {
       offset: 0
     },
     xAxis: {
-      offset: -1
+      offset: -3
     },
     plotOptions: {
       series: {

@@ -1,34 +1,21 @@
 import Highcharts from 'https://code.highcharts.com/es-modules/masters/highcharts.src.js'
 import 'https://code.highcharts.com/es-modules/masters/modules/data.src.js'
-import 'https://code.highcharts.com/es-modules/masters/modules/exporting.src.js'
+
 
 const params = new URLSearchParams(window.location.search)
 const spreadsheet = params.get("spreadsheetkey") || '1da82Nx3vYm14msH7oYtdYkrXoSSmsU84xlf8EMIofNg';
 const spreadSheetKey = params.get("spreadsheetKey") || 1
 
-Highcharts.chart("container", {
+const chart = Highcharts.chart("container", {
   chart: {
     styledMode: true,
-    type: "line",
-    events: {
-      render: ({ target: chart }) => {
-        const background = document.querySelector(".highcharts-background")
-        const { fill } = getComputedStyle(background);
-        if (fill === 'rgb(0, 0, 0)') {
-          chart.renderer.image('https://financeinnovation.fra1.digitaloceanspaces.com/NCE_Finance_Innovation_logo_NCE_negative_rgb.svg',
-            0, 0, 594 / 2, 432 / 2).align({ align: "left" }).add();
-        } else {
-          chart.renderer.image('https://financeinnovation.fra1.digitaloceanspaces.com/NCE_Finance_Innovation_logo_NCE_positive_rgb.svg',
-            0, 0, 594 / 2, 432 / 2).align({ align: "left" }).add();
-        }
-      }
-    }
+    type: "line"
   },
   title: {
-    text: "Antall medlemmer FI"
+    text: "Antall medlemmer"
   },
   credits: {
-    enabled: true,
+    enabled: false,
     text: "NCE Finance Innovation"
   },
   yAxis: {
@@ -36,7 +23,7 @@ Highcharts.chart("container", {
     offset: 0
   },
   xAxis: {
-    offset: -1
+    offset: -3
   },
   plotOptions: {
     chart: {
@@ -52,11 +39,11 @@ Highcharts.chart("container", {
     glow: {
       tagName: 'filter',
       id: 'glow',
-      opacity: 0.5,
+      opacity: 0.25,
       children: [{
         tagName: 'feGaussianBlur',
         result: 'coloredBlur',
-        stdDeviation: 2.5
+        stdDeviation: 3.5
       }, {
         tagName: 'feMerge',
         children: [{
@@ -78,6 +65,9 @@ Highcharts.chart("container", {
   data: {
     googleSpreadsheetKey: spreadsheet,
     googleSpreadsheetWorksheet: 1, // fane nr 1
-    switchRowsAndColumns: true
+    switchRowsAndColumns: true,
+    parsed: (data) =>{
+      if(data[0][0]) chart.setTitle({text: data[0][0]});
+    }
   }
 });

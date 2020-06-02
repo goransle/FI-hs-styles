@@ -26,6 +26,7 @@ const chart = Highcharts.stockChart("container", {
     enabled: false
   },
   yAxis: {
+    opposite: false
   },
   scrollbar: {
     enabled: false
