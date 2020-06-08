@@ -1,8 +1,8 @@
 import Highcharts from 'https://code.highcharts.com/es-modules/masters/highcharts.src.js';
 import 'https://code.highcharts.com/es-modules/masters/highcharts-more.src.js';
 import 'https://code.highcharts.com/es-modules/masters/modules/data.src.js';
-import 'https://code.highcharts.com/es-modules/masters/modules/exporting.src.js';
-
+import 'https://code.highcharts.com/es-modules/masters/modules/exporting.src.js'
+import 'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'
 
 async function fetchSheet(googleSpreadsheetKey, worksheet) {
     var url = [
@@ -36,6 +36,7 @@ async function fetchSheet(googleSpreadsheetKey, worksheet) {
                             cell.gs$cell.$t
                         );
                     }
+                    //console.log(data[2]);
 
                 });
 
@@ -48,14 +49,15 @@ async function fetchSheet(googleSpreadsheetKey, worksheet) {
                     if (!seriesDataSets[row[3]]) {
                         seriesDataSets[row[3]] = [];
                     }
-
+                    seriesDataSets[1]
                     seriesDataSets[row[3]].push({
                         name: row[1],
                         value: row[2]
                     });
 
                 });
-                console.log(seriesDataSets);
+
+                // console.log(seriesDataSets);
                 resolve(seriesDataSets);
 
             },
@@ -69,27 +71,73 @@ async function fetchSheet(googleSpreadsheetKey, worksheet) {
     });
 }
 
+let hoverFx;
 const chart = Highcharts.chart(
     'container',
     {
         chart: {
             type: 'packedbubble',
-            height: '100%'
+            height: '100%',
+            events: {
+                addSeries: function () {
+
+                    const seriesArray = chart.series;
+                    var timesRun = 0;
+
+                    if (!hoverFx) {
+                        
+                        hoverFx = window.setInterval(function () {
+
+                            if (!seriesArray.length) {
+                                return;
+                            }
+
+                            let hoverSeries = (
+                                chart.hoverPoint && chart.hoverPoint.series ||
+                                chart.hoverSeries
+                            );
+
+                            if (hoverSeries) {
+                                hoverSeries.points[0].onMouseOut();
+                            }
+
+                            if (!hoverSeries || hoverSeries.index >= (seriesArray.length - 1)) {
+                                hoverSeries = seriesArray[0];
+                            } else {
+                                hoverSeries = seriesArray[hoverSeries.index + 1];
+                            }
+
+                            hoverSeries.points[0].onMouseOver();
+
+                            // A this if stops the infinite hovering after ca. 120 seconds.
+                            // Can be deleted if infinite hovering is wanted.
+                            timesRun++;
+                            if(timesRun === 60) {
+                                hoverSeries.onMouseOut();
+                                clearInterval(hoverFx)
+                            }
+                        }, 2000);
+                    }
+                }
+            }
         },
         title: {
             text: 'Medlemmar i clusteret'
         },
         //colors: ['#F0F', '#0F0', 'blue', 'pink','yellow'],
+        // tooltip are turned off, the information is only valuable due to bubble sizes
         tooltip: {
-            useHTML: true,
-            pointFormat: '<b>{point.name}:</b> {point.value} millionar NOK'
+            style: {
+                display: 'none'
+            }
         },
         plotOptions: {
+            
             packedbubble: {
-                minSize: '30%',
-                maxSize: '120%',
+                minSize: '10%',
+                maxSize: '100%',
                 zMin: 0,
-                zMax: 1000,
+                zMax: 300,
                 layoutAlgorithm: {
                     splitSeries: false,
                     gravitationalConstant: 0.02
@@ -101,18 +149,19 @@ const chart = Highcharts.chart(
                 style: {
                     color: 'black',
                     textOutline: 'none',
-                    fontWeight: 'normal'
+                    fontWeight: 'normal',
+                    width: '3px'
                 }
             }
-        }
-
+        }, // Plot options
+        //series :{},
     }
 );
-
-fetchSheet('1da82Nx3vYm14msH7oYtdYkrXoSSmsU84xlf8EMIofNg', 8)
+ 
+fetchSheet('1fLdwO1JAYL7WEnwuTm5srHCqwCOhwm6d8ds6RvT00Tw', 4)
     .then(
         seriesDataSets => {
-            console.log(seriesDataSets);
+            //console.log(seriesDataSets);
             Highcharts.objectEach(
                 seriesDataSets,
                 (data, name) => chart.addSeries({ name, data })

@@ -26,8 +26,7 @@ Highcharts.chart("container", {
         innerSize: '20%',
         endAngle: 270
     },
-    xAxis: {
-    		
+    xAxis: {	
         tickInterval: 1,
         labels: {
             align: 'right',
