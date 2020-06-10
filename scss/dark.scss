@@ -1,10 +1,6 @@
-:root {
-  --color-y: rgba(255, 255, 0);
-  --color-t: rgba(0, 255, 255);
-  --color-b: rgba(0, 0, 255);
-  --color-p: rgba(204, 0, 255);
-}
-@import url("https://fonts.googleapis.com/css?family=Lato:400,700,900|Roboto:400,700,900&display=swap");
+@use 'base.scss';
+@include base.vars;
+@include base.fonts;
 
 /**
    * @license Highcharts
@@ -95,28 +91,7 @@ html {
   padding: 0;
   margin: 0;
 }
-#FI-branding {
-  width: 20%;
-  position: absolute;
-  z-index: 100;
-  top: 10%;
-  left: 5%;
-  background-repeat: no-repeat;
-}
-#FI-branding img {
-  height: 100%;
-}
-
-#hc-branding {
-  position: absolute;
-  z-index: 100;
-  bottom: 5%;
-  right: 5%;
-  height: 40px;
-}
-#hc-branding img {
-  height: 100%;
-}
+@include base.branding;
 
 #container {
   width: 100%;
@@ -528,7 +503,7 @@ circle.highcharts-legend-nav-inactive {
 .highcharts-loading {
   position: absolute;
   background-color: $background-color;
-  opacity: 0.5;
+  opacity: 1;
   text-align: center;
   z-index: 10;
   transition: opacity 250ms;
