@@ -4,21 +4,33 @@ import 'https://code.highcharts.com/8.1.0/es-modules/masters/modules/data.src.js
 import 'https://code.highcharts.com/8.1.0/es-modules/masters/modules/exporting.src.js';
 import defaultOptions from '../js/defaultOptions.js';
 
-
 // Netto nedlastingar per måned
-Highcharts.chart("container", {
+const chart = Highcharts.chart("container", {
     chart: {
         type: 'column',
         inverted: true,
         polar: true,
         styledMode: true,
-        events: defaultOptions.chart.events
+        events: {
+            ...defaultOptions.chart.events,
+            redraw: (e) => {
+                // Setter subtitle og serienavn til lesbar dato
+                // TODO: bør kanskje tåle fleire serier
+                const { series } = e.target;
+                if (series.length && series[0].name.indexOf('/') > -1) {
+                    const dateString = new Date(Date.UTC(series[0].name.split("/")[2], series[0].name.split("/")[1] - 1))
+                        .toLocaleString('nb', { month: 'long', year: 'numeric' });
+                    series[0].name = dateString.slice(0)[0].toUpperCase() + dateString.slice(1);
+                    chart.setTitle(null, { text: series[0].name })
+                }
+            }
+        }
     },
     title: {
-        text: 'Antall nedlastingar per månad'
+        text: ''
     },
     subtitle: {
-    		text: 'Juni 2020'
+        text: ''
     },
     tooltip: {
         outside: true
@@ -28,7 +40,7 @@ Highcharts.chart("container", {
         innerSize: '20%',
         endAngle: 270
     },
-    xAxis: {	
+    xAxis: {
         tickInterval: 1,
         labels: {
             align: 'right',
@@ -61,9 +73,11 @@ Highcharts.chart("container", {
             groupPadding: 0.15
         },
     },
-  data: {
-    googleSpreadsheetKey: "1da82Nx3vYm14msH7oYtdYkrXoSSmsU84xlf8EMIofNg",
-    googleSpreadsheetWorksheet: 7, // fane nr 7
- 
-  }
+    data: {
+        googleSpreadsheetKey: "1da82Nx3vYm14msH7oYtdYkrXoSSmsU84xlf8EMIofNg",
+        googleSpreadsheetWorksheet: 7, // fane nr 7
+        parsed: (data) => {
+            if (data[0][0]) chart.setTitle({ text: data[0][0] });
+        }
+    }
 });
