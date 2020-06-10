@@ -8,6 +8,12 @@
 </head>
 <body>
     <div id="container"></div>
+    <div id="FI-branding" style="display: none;">
+        <img src="../NCE_Finance_Innovation_logo_NCE_negative_rgb.svg" alt="">
+    </div>
+    <div id="hc-branding" style="display: none;">
+        <img src="../highcharts-logo.svg" alt="">
+    </div>
     <button id="themeswitcher-button">Bytt tema</button>
     <form>
         <input type="text" name="" id="spreadSheetID">
@@ -16,8 +22,8 @@
     </form>
     <script type="module" src="hs.js"></script>
     <script type="module">
-        import themeswitcher from "../themeswitcher.js";
-        import '../switcherButton.js';
+        import themeswitcher from "../js/themeswitcher.js";
+        import '../js/switcherButton.js';
         themeswitcher("#themeswitcher-button");
     </script>
 </body>

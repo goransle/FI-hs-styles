@@ -1,16 +1,18 @@
-import Highcharts from 'https://code.highcharts.com/es-modules/masters/highcharts.src.js'
-import 'https://code.highcharts.com/es-modules/masters/modules/data.src.js'
+import Highcharts from 'https://code.highcharts.com/8.1.0/es-modules/masters/highcharts.src.js'
+import 'https://code.highcharts.com/8.1.0/es-modules/modules/data.src.js'
 import defaultOptions from '../js/defaultOptions.js';
+import setImages from '../js/setImages.js';
 
 const params = new URLSearchParams(window.location.search)
-const spreadsheet = params.get("spreadsheetkey") || '1da82Nx3vYm14msH7oYtdYkrXoSSmsU84xlf8EMIofNg';
+const spreadsheet = params.get("spreadsheetkey") || '1fLdwO1JAYL7WEnwuTm5srHCqwCOhwm6d8ds6RvT00Tw';
+const spreadSheetKey = params.get("spreadsheetKey") || 2
 
 
 const chart = Highcharts.chart("container", {
   ...defaultOptions,
   data: {
     googleSpreadsheetKey: spreadsheet,
-    googleSpreadsheetWorksheet: 1, // fane nr 1
+    googleSpreadsheetWorksheet: spreadSheetKey, // fane nr 1
     switchRowsAndColumns: true,
     complete: (data) => {
       data.series.forEach(s => {
@@ -20,6 +22,8 @@ const chart = Highcharts.chart("container", {
           return d;
         })
       })
+        chart.hideLoading();
+        setImages();
     },
     parsed: (data) => {
       if (data[0][0]) chart.setTitle({ text: data[0][0] });

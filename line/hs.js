@@ -1,18 +1,23 @@
-import Highcharts from 'https://code.highcharts.com/es-modules/masters/highcharts.src.js'
-import 'https://code.highcharts.com/es-modules/masters/modules/data.src.js'
 
+import Highcharts from 'https://code.highcharts.com/8.1.0/es-modules/masters/highcharts.src.js'
+import 'https://code.highcharts.com/8.1.0/es-modules/masters/modules/data.src.js'
+import setImages from '../js/setImages.js';
+import defaultOptions from '../js/defaultOptions.js';
 
+//@ts-check
 const params = new URLSearchParams(window.location.search)
-const spreadsheet = params.get("spreadsheetkey") || '1da82Nx3vYm14msH7oYtdYkrXoSSmsU84xlf8EMIofNg';
-const spreadSheetKey = params.get("spreadsheetKey") || 1
+const spreadsheet = params.get("spreadsheetkey") || '1fLdwO1JAYL7WEnwuTm5srHCqwCOhwm6d8ds6RvT00Tw';
+const spreadSheetKey = params.get("spreadsheetKey") || 1;
+
 
 const chart = Highcharts.chart("container", {
-  chart: {
-    styledMode: true,
-    type: "line"
+  ...defaultOptions,
+  loading:{
+    showDuration: 1500,
+    hideDuration: 1500
   },
   title: {
-    text: "Antall medlemmer"
+    text: ""
   },
   credits: {
     enabled: false,
@@ -64,10 +69,16 @@ const chart = Highcharts.chart("container", {
   },
   data: {
     googleSpreadsheetKey: spreadsheet,
-    googleSpreadsheetWorksheet: 1, // fane nr 1
+    googleSpreadsheetWorksheet: spreadSheetKey,
     switchRowsAndColumns: true,
     parsed: (data) =>{
       if(data[0][0]) chart.setTitle({text: data[0][0]});
+    },
+    complete:(e) =>{
+      chart.hideLoading()
+      setImages();
     }
   }
 });
+
+chart.showLoading("Loading...");

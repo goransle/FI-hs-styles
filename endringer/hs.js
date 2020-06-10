@@ -1,8 +1,8 @@
-import Highcharts from 'https://code.highcharts.com/es-modules/masters/highcharts.src.js'
-import 'https://code.highcharts.com/es-modules/masters/modules/stock.src.js'
-import 'https://code.highcharts.com/es-modules/masters/modules/data.src.js'
-import 'https://code.highcharts.com/es-modules/masters/modules/exporting.src.js'
+import Highcharts from 'https://code.highcharts.com/8.1.0/es-modules/masters/highcharts.src.js'
+import 'https://code.highcharts.com/8.1.0/es-modules/masters/modules/stock.src.js'
+import 'https://code.highcharts.com/8.1.0/es-modules/masters/modules/data.src.js'
 import defaultOptions from '../js/defaultOptions.js';
+import setImages from '../js/setImages.js';
 
 const params = new URLSearchParams(window.location.search)
 const spreadsheet = params.get("spreadsheetID") || '1da82Nx3vYm14msH7oYtdYkrXoSSmsU84xlf8EMIofNg';
@@ -34,6 +34,13 @@ const chart = Highcharts.stockChart("container", {
   data: {
     googleSpreadsheetKey: spreadsheet,
     googleSpreadsheetWorksheet: spreadSheetKey, // fane nr 1
-    switchRowsAndColumns: true
+    switchRowsAndColumns: true,
+    complete: ()=>{
+      chart.hideLoading();
+      setImages();
+    },
+    parsed: (data) =>{
+      if(data[0][0]) chart.setTitle({text: data[0][0]});
+    }
   }
 });

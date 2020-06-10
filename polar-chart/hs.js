@@ -1,7 +1,8 @@
-import Highcharts from 'https://code.highcharts.com/es-modules/masters/highcharts.src.js';
-import 'https://code.highcharts.com/es-modules/masters/highcharts-more.src.js';
-import 'https://code.highcharts.com/es-modules/masters/modules/data.src.js';
-import 'https://code.highcharts.com/es-modules/masters/modules/exporting.src.js';
+import Highcharts from 'https://code.highcharts.com/8.1.0/es-modules/masters/highcharts.src.js';
+import 'https://code.highcharts.com/8.1.0/es-modules/masters/highcharts-more.src.js';
+import 'https://code.highcharts.com/8.1.0/es-modules/masters/modules/data.src.js';
+import 'https://code.highcharts.com/8.1.0/es-modules/masters/modules/exporting.src.js';
+import defaultOptions from '../js/defaultOptions.js';
 
 
 // Netto nedlastingar per måned
@@ -10,7 +11,8 @@ Highcharts.chart("container", {
         type: 'column',
         inverted: true,
         polar: true,
-        styledMode: true
+        styledMode: true,
+        events: defaultOptions.chart.events
     },
     title: {
         text: 'Antall nedlastingar per månad'
