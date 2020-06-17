@@ -28,7 +28,7 @@ export default {
     }
   },
   title: {
-    text: "NCE Finance Innovation"
+    text: ""
   },
   credits: {
     enabled: false,

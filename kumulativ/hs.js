@@ -1,5 +1,5 @@
-import Highcharts from 'https://code.highcharts.com/8.1.0/es-modules/masters/highcharts.src.js'
-import 'https://code.highcharts.com/8.1.0/es-modules/modules/data.src.js'
+import Highcharts from 'https://code.highcharts.com/es-modules/masters/highcharts.src.js'
+import 'https://code.highcharts.com/es-modules/modules/data.src.js'
 import defaultOptions from '../js/defaultOptions.js';
 import setImages from '../js/setImages.js';
 
@@ -30,3 +30,5 @@ const chart = Highcharts.chart("container", {
     }
   }
 });
+
+chart.showLoading('....');
