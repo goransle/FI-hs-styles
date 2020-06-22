@@ -14,6 +14,7 @@ const chart = Highcharts.chart("container", {
     googleSpreadsheetKey: spreadsheet,
     googleSpreadsheetWorksheet: spreadSheetKey, // fane nr 1
     switchRowsAndColumns: true,
+    dateFormat: 'mm/dd/YYYY',
     complete: (data) => {
       data.series.forEach(s => {
         // Add the previous years data

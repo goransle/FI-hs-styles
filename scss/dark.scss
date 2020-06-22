@@ -1,6 +1,7 @@
 @use 'base.scss';
 @include base.vars;
 @include base.fonts;
+@include base.axes;
 
 /**
    * @license Highcharts
@@ -180,11 +181,11 @@ html {
 }
 
 /* Axes */
-.highcharts-axis-line {
-  fill: none;
-  stroke: var(--color-y);
-  stroke-width: 5px;
-}
+// .highcharts-axis-line {
+//   fill: none;
+//   stroke: var(--color-y);
+//   stroke-width: 5px;
+// }
 .highcharts-axis-title {
   fill: $neutral-color-60;
 }

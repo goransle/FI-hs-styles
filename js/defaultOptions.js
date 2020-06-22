@@ -13,7 +13,8 @@ export default {
           let currentVisibleSeries = 0;
           setInterval(() => {
             if (e.target.series.length > 1) {
-              e.target.series[currentVisibleSeries].points[0].onMouseOver();
+              const series = e.target.series[currentVisibleSeries];
+              series.points[Math.floor((series.points.length - 1) / 2)].onMouseOver();
               if (currentVisibleSeries === e.target.series.length - 1) currentVisibleSeries = 0;
               else currentVisibleSeries++;
             }
@@ -25,6 +26,22 @@ export default {
           }, params.get("cycleSpeed") || 5000);
         }
       }
+    }
+  },
+  tooltip: {
+    formatter: function () {
+      const [min, max] = [this.series.dataMin, this.series.dataMax];
+      const total = this.series.processedYData.reduce((a, x) => a + x);
+      const avg = total / this.series.processedYData.length;
+      return `${this.series.name}<br>
+      <span style="color:lightgreen">Beste: ${max}<span><br>
+      <span style="color:red">Laveste: ${min}<span><br>
+      Gjennomsnitt: ${avg}<br>
+      Totalt: ${total}
+      `;
+    },
+    positioner: function (e) {
+      return { x: Number(this.chart.containerWidth) - (e + 32), y: this.chart.yAxis[0].height - this.label.box.height / 2};
     }
   },
   title: {
