@@ -1149,6 +1149,7 @@ html {
 
 .highcharts-tooltip text {
   fill: var(--color-t);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .highcharts-tooltip-box {
