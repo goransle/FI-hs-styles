@@ -32,7 +32,8 @@ export default {
     distance: 0,
     positioner: function (e) {
       return { x: Number(this.chart.containerWidth) - (e + 32), y: this.chart.yAxis[0].height - this.label.box.height / 2};
-    }
+    },
+    shape: 'square'
   },
   title: {
     text: ""
