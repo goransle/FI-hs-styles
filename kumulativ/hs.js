@@ -7,9 +7,6 @@ const params = new URLSearchParams(window.location.search)
 const spreadsheet = params.get("spreadsheetkey") || '1fLdwO1JAYL7WEnwuTm5srHCqwCOhwm6d8ds6RvT00Tw';
 const spreadSheetKey = params.get("spreadsheetKey") || 3
 
-let originalData;
-
-
 const chart = Highcharts.chart("container", {
   ...defaultOptions,
   tooltip:{
@@ -48,7 +45,6 @@ const chart = Highcharts.chart("container", {
         setImages();
     },
     parsed: (data) => {
-      originalData = data;
       if (data[0][0]) chart.setTitle({ text: data[0][0] });
     }
   }

@@ -2,7 +2,7 @@ document.querySelector("#spreadSheetSwitcherButton").addEventListener('click', e
     e.preventDefault();
     const params = new URLSearchParams(window.location.search)
     params.set('spreadsheetID',document.querySelector('#spreadSheetID').value );
-    params.set('spreadSheetKey',document.querySelector('#spreadSheetKey').value );
+    params.set('spreadsheetKey',document.querySelector('#spreadSheetKey').value );
     window.location.search = '?' + params.toString()
 });
 
