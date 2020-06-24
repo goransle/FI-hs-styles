@@ -179,6 +179,11 @@ html {
   //filter: url(#glow);
 }
 
+.highcharts-axis-labels.highcharts-xaxis-labels span {
+  color: $neutral-color-60;
+  fill: $neutral-color-60;
+}
+
 /* Axes */
 // .highcharts-axis-line {
 //   fill: none;
@@ -194,6 +199,7 @@ html {
   font-size: $axis-labels-font-size;
   font-weight: 500;
 }
+
 .highcharts-grid-line {
   fill: none;
   stroke: $neutral-color-10;

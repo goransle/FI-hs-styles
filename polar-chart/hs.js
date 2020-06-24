@@ -5,7 +5,10 @@ import 'https://code.highcharts.com/es-modules/masters/modules/exporting.src.js'
 import defaultOptions from '../js/defaultOptions.js';
 import setImages from '../js/setImages.js';
 
-// Netto nedlastingar per måned
+const params = new URLSearchParams(window.location.search)
+const spreadsheet = params.get("spreadsheetkey") || '1fLdwO1JAYL7WEnwuTm5srHCqwCOhwm6d8ds6RvT00Tw';
+const spreadSheetKey = params.get("spreadsheetKey") || 5;
+
 const chart = Highcharts.chart("container", {
     chart: {
         type: 'column',
@@ -30,11 +33,18 @@ const chart = Highcharts.chart("container", {
     title: {
         text: ''
     },
+    credits: {
+        enabled: false,
+        text: "NCE Finance Innovation"
+    },
     subtitle: {
         text: ''
     },
     tooltip: {
-        outside: true
+        outside: true,
+    },
+    legend: {
+        enabled: false
     },
     pane: {
         size: '85%',
@@ -50,7 +60,8 @@ const chart = Highcharts.chart("container", {
             step: 1,
             y: 3,
             style: {
-                fontSize: '13px'
+                fontSize: '13px',
+                color: '#FFFFFF'
             }
         },
         lineWidth: 0,
@@ -80,14 +91,14 @@ const chart = Highcharts.chart("container", {
         },
     },
     data: {
-        googleSpreadsheetKey: "1da82Nx3vYm14msH7oYtdYkrXoSSmsU84xlf8EMIofNg",
-        googleSpreadsheetWorksheet: 7, // fane nr 7
+        googleSpreadsheetKey: spreadsheet,
+        googleSpreadsheetWorksheet: spreadSheetKey,
         parsed: (data) => {
             if (data[0][0]) chart.setTitle({ text: data[0][0] });
         },
-        complete:(e) =>{
-            chart.hideLoading()
+        complete:(e) => {
             setImages();
-          }
+        }
     }
 });
+

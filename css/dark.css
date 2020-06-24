@@ -1080,6 +1080,11 @@ html {
   fill: #fafdff;
 }
 
+.highcharts-axis-labels.highcharts-xaxis-labels span {
+  color: white;
+  fill: white;
+}
+
 /* Axes */
 .highcharts-axis-title {
   fill: white;

@@ -3,17 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medlemmar i clusteret</title>
-    <link rel="stylesheet" href="../css/base.css">
+    <title>Finance Innovation charts</title>
+    <link rel="stylesheet" href="../css/dark.css">
 </head>
 <body>
     <div id="container"></div>
+    <div id="FI-branding" style="display: none;">
+        <img src="../NCE_Finance_Innovation_logo_NCE_negative_rgb.svg" alt="">
+    </div>
+    <div id="hc-branding" style="display: none;">
+        <img src="../highcharts-logo.svg" alt="">
+    </div>
     <button id="themeswitcher-button">Bytt tema</button>
     <form>
         <input type="text" name="" id="spreadSheetID">
         <input type="number" name="" id="spreadSheetKey">
         <button id ="spreadSheetSwitcherButton">Bytt regneark</button>
     </form>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/data.js"></script>
     <script type="module" src="hs.js"></script>
     <script type="module">
         import themeswitcher from "../js/themeswitcher.js";
