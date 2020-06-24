@@ -77,7 +77,7 @@ const chart = Highcharts.chart(
     {
         chart: {
             type: 'packedbubble',
-            height: '100%',
+            height: '70%',
             events: {
                 addSeries: function () {
 
@@ -137,7 +137,7 @@ const chart = Highcharts.chart(
                 minSize: '10%',
                 maxSize: '100%',
                 zMin: 0,
-                zMax: 300,
+                zMax: 100,
                 layoutAlgorithm: {
                     splitSeries: false,
                     gravitationalConstant: 0.02

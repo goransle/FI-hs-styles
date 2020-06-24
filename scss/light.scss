@@ -284,6 +284,7 @@ html {
 }
 .highcharts-tooltip text {
   fill: $neutral-color-80;
+  font-family: $font-family;
 }
 .highcharts-tooltip .highcharts-header {
   font-size: 0.85em;

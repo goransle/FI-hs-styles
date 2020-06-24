@@ -232,6 +232,7 @@ html {
 
 .highcharts-tooltip text {
   fill: #000000;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .highcharts-tooltip .highcharts-header {
