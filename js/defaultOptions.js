@@ -42,6 +42,9 @@ export default {
     text: "NCE Finance Innovation"
   },
   yAxis: {
+    title: {
+      text: null
+    },
     color: 'white'
     //minPadding: 0.025
   },
