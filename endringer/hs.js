@@ -5,8 +5,8 @@ import defaultOptions from '../js/defaultOptions.js';
 import setImages from '../js/setImages.js';
 
 const params = new URLSearchParams(window.location.search)
-const spreadsheet = params.get("spreadsheetID") || '1da82Nx3vYm14msH7oYtdYkrXoSSmsU84xlf8EMIofNg';
-const spreadSheetKey = params.get("spreadsheetKey") || 1
+const spreadsheet = params.get("spreadsheetID") || '1fLdwO1JAYL7WEnwuTm5srHCqwCOhwm6d8ds6RvT00Tw';
+const spreadSheetKey = params.get("spreadsheetKey") || 2
 
 const chart = Highcharts.stockChart("container", {
   ...defaultOptions,
@@ -15,6 +15,26 @@ const chart = Highcharts.stockChart("container", {
       compare: 'percent',
       showInNavigator: true
     }
+  },
+  chart:{
+    ...defaultOptions.chart,
+    events:{
+      load: (e) => {
+        if (params.get("cycle")) {
+          let currentVisibleSeries = 0;
+          setInterval(() => {
+            if (e.target.series) {
+              e.target.series[0].points[currentVisibleSeries].onMouseOver();
+              if (currentVisibleSeries === e.target.series[0].points.length - 1) currentVisibleSeries = 0;
+              else currentVisibleSeries++;
+            }
+          }, params.get("cycleSpeed") || 5000);
+        }
+      }
+    }
+  },
+  legend:{
+    enabled: true
   },
   tooltip: {
     pointFormat: '<span>{series.name}</span>: <b>{point.y}</b> ({point.change}%)<br/>',

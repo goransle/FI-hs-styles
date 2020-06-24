@@ -29,17 +29,7 @@ export default {
     }
   },
   tooltip: {
-    formatter: function () {
-      const [min, max] = [this.series.dataMin, this.series.dataMax];
-      const total = this.series.processedYData.reduce((a, x) => a + x);
-      const avg = total / this.series.processedYData.length;
-      return `${this.series.name}<br>
-      <span style="color:lightgreen">Beste: ${max}<span><br>
-      <span style="color:red">Laveste: ${min}<span><br>
-      Gjennomsnitt: ${avg}<br>
-      Totalt: ${total}
-      `;
-    },
+    distance: 0,
     positioner: function (e) {
       return { x: Number(this.chart.containerWidth) - (e + 32), y: this.chart.yAxis[0].height - this.label.box.height / 2};
     }
@@ -52,14 +42,17 @@ export default {
     text: "NCE Finance Innovation"
   },
   yAxis: {
-    title: null,
-    offset: 0
+    color: 'white'
+    //minPadding: 0.025
   },
   xAxis: {
-    offset: -3
+    minPadding: 0.015,
+    offset: -3.55
   },
   plotOptions: {
     series: {
+      // pointStart: 0,
+      // softThreshold: false,
       marker: {
         symbol: 'square'
       }
@@ -69,7 +62,7 @@ export default {
     glow: {
       tagName: 'filter',
       id: 'glow',
-      opacity: 0.5,
+      opacity: 0.25,
       children: [{
         tagName: 'feGaussianBlur',
         result: 'coloredBlur',

@@ -41,7 +41,7 @@ $font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !default;
 $title-font-size: 3em !default;
 $subtitle-font-size: 1em !default;
 $legend-font-size: 1em !default;
-$axis-labels-font-size: 0.9em !default;
+$axis-labels-font-size: 1em !default;
 
 // Tooltip
 $tooltip-border: 1px !default;
@@ -139,7 +139,6 @@ html {
   stroke-dasharray: 100%, 100%, 0;
   stroke-dashoffset: 100%;
   stroke-width: 0;
-  filter: url(#glow);
 }
 
 .highcharts-plot-border,
@@ -174,7 +173,7 @@ html {
 }
 
 .highcharts-axis.highcharts-xaxis {
-  filter: url(#glow);
+  //filter: url(#glow);
 }
 .highcharts-axis.highcharts-yaxis {
   //filter: url(#glow);
@@ -193,6 +192,7 @@ html {
   fill: $neutral-color-60;
   cursor: default;
   font-size: $axis-labels-font-size;
+  font-weight: 500;
 }
 .highcharts-grid-line {
   fill: none;
@@ -234,30 +234,7 @@ html {
 }
 
 /* Tooltip */
-.highcharts-tooltip {
-  cursor: default;
-  pointer-events: none;
-  white-space: nowrap;
-  transition: stroke 150ms;
-}
-.highcharts-tooltip text {
-  fill: $neutral-color-80;
-}
-.highcharts-tooltip .highcharts-header {
-  font-size: 0.85em;
-}
-.highcharts-tooltip-box {
-  stroke-width: $tooltip-border;
-  fill: $tooltip-background;
-  fill-opacity: 0.85;
-}
-.highcharts-tooltip-box .highcharts-label-box {
-  fill: $tooltip-background;
-  fill-opacity: 0.85;
-}
-div.highcharts-tooltip {
-  filter: none;
-}
+@include base.tooltip($tooltip-background, $neutral-color-80);
 
 .highcharts-selection-marker {
   fill: $highlight-color-80;

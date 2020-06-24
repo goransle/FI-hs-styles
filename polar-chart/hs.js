@@ -3,6 +3,7 @@ import 'https://code.highcharts.com/es-modules/masters/highcharts-more.src.js';
 import 'https://code.highcharts.com/es-modules/masters/modules/data.src.js';
 import 'https://code.highcharts.com/es-modules/masters/modules/exporting.src.js';
 import defaultOptions from '../js/defaultOptions.js';
+import setImages from '../js/setImages.js';
 
 // Netto nedlastingar per måned
 const chart = Highcharts.chart("container", {
@@ -63,7 +64,12 @@ const chart = Highcharts.chart("container", {
         tickInterval: 200,
         reversedStacks: false,
         endOnTick: true,
-        showLastLabel: true
+        showLastLabel: true,
+        labels:{
+           style:{
+               color: 'white'
+           }
+        }
     },
     plotOptions: {
         column: {
@@ -78,6 +84,10 @@ const chart = Highcharts.chart("container", {
         googleSpreadsheetWorksheet: 7, // fane nr 7
         parsed: (data) => {
             if (data[0][0]) chart.setTitle({ text: data[0][0] });
-        }
+        },
+        complete:(e) =>{
+            chart.hideLoading()
+            setImages();
+          }
     }
 });

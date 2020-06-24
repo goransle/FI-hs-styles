@@ -1,10 +1,7 @@
-:root {
-  --color-y: rgba(255, 255, 0);
-  --color-t: rgba(0, 255, 255);
-  --color-b: rgba(0, 0, 255);
-  --color-p: rgba(204, 0, 255);
-}
-@import url("https://fonts.googleapis.com/css?family=Lato:400,700,900|Roboto:400,700,900&display=swap");
+@use 'base.scss';
+@include base.vars;
+@include base.fonts;
+@include base.axes;
 
 /**
    * @license Highcharts
@@ -276,30 +273,7 @@ html {
 }
 
 /* Tooltip */
-.highcharts-tooltip {
-  cursor: default;
-  pointer-events: none;
-  white-space: nowrap;
-  transition: stroke 150ms;
-}
-.highcharts-tooltip text {
-  fill: $neutral-color-80;
-}
-.highcharts-tooltip .highcharts-header {
-  font-size: 0.85em;
-}
-.highcharts-tooltip-box {
-  stroke-width: $tooltip-border;
-  fill: $tooltip-background;
-  fill-opacity: 0.85;
-}
-.highcharts-tooltip-box .highcharts-label-box {
-  fill: $tooltip-background;
-  fill-opacity: 0.85;
-}
-div.highcharts-tooltip {
-  filter: none;
-}
+@include base.tooltip($tooltip-background, $neutral-color-80);
 
 .highcharts-selection-marker {
   fill: $highlight-color-80;
