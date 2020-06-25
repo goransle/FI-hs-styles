@@ -84,7 +84,8 @@ const chart = Highcharts.chart(
                     const seriesArray = chart.series;
                     var timesRun = 0;
 
-                    if (!hoverFx) {
+                    const params = new URLSearchParams(window.location.search);
+                    if (params.get('cycle') && !hoverFx) {
                         
                         hoverFx = window.setInterval(function () {
 
@@ -116,7 +117,7 @@ const chart = Highcharts.chart(
                                 hoverSeries.onMouseOut();
                                 clearInterval(hoverFx)
                             }
-                        }, 2000);
+                        }, params.get('cycleSpeed') || 2000);
                     }
                 }
             }
