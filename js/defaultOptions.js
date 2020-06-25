@@ -50,6 +50,7 @@ export default {
     //minPadding: 0.025
   },
   xAxis: {
+    minTickInterval: 1,
     minPadding: 0.015,
     offset: -3.55
   },
