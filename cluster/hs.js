@@ -3,6 +3,7 @@ import 'https://code.highcharts.com/es-modules/masters/highcharts-more.src.js';
 import 'https://code.highcharts.com/es-modules/masters/modules/data.src.js';
 import 'https://code.highcharts.com/es-modules/masters/modules/exporting.src.js'
 import 'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'
+import defaultOptions from '../js/defaultOptions.js';
 
 async function fetchSheet(googleSpreadsheetKey, worksheet) {
     var url = [
@@ -155,6 +156,9 @@ const chart = Highcharts.chart(
             }
         }, // Plot options
         //series :{},
+        exporting: {
+            ...defaultOptions.exporting
+        }
     }
 );
  

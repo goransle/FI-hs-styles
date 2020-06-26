@@ -31,9 +31,15 @@ export default {
   tooltip: {
     distance: 0,
     positioner: function (e) {
-      return { x: Number(this.chart.containerWidth) - (e + 32), y: this.chart.yAxis[0].height - this.label.box.height / 2};
+      return { x: Number(this.chart.containerWidth) - (e + 32), y: this.chart.yAxis[0].height - this.label.box.height / 2 };
     },
     shape: 'square'
+  },
+  exporting: {
+    enabled: params.get('exporting') || false,
+    sourceWidth: 1920,
+    sourceHeight: 1080,
+    allowHTML: true
   },
   title: {
     text: ""

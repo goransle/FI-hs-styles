@@ -51,6 +51,9 @@ const chart = Highcharts.chart("container", {
         innerSize: '20%',
         endAngle: 270
     },
+    exporting:{
+        ...defaultOptions.exporting
+    },
     xAxis: {
         tickInterval: 1,
         labels: {
