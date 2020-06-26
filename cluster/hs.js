@@ -4,6 +4,8 @@ import 'https://code.highcharts.com/es-modules/masters/modules/data.src.js';
 import 'https://code.highcharts.com/es-modules/masters/modules/exporting.src.js'
 import 'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'
 
+let title = '';
+
 async function fetchSheet(googleSpreadsheetKey, worksheet) {
     var url = [
         'https://spreadsheets.google.com/feeds/cells',
@@ -43,6 +45,7 @@ async function fetchSheet(googleSpreadsheetKey, worksheet) {
                 data.forEach((row, index) => {
 
                     if (index <= 1) {
+                        title = data[1][1];
                         return;
                     }
 
@@ -117,11 +120,12 @@ const chart = Highcharts.chart(
                             }
                         }, params.get('cycleSpeed') || 2000);
                     }
+                    chart.setTitle({text: title})
                 }
             }
         },
         title: {
-            text: 'Medlemmar i clusteret'
+            text: title
         },
         //colors: ['#F0F', '#0F0', 'blue', 'pink','yellow'],
         // tooltip are turned off, the information is only valuable due to bubble sizes
@@ -173,7 +177,9 @@ fetchSheet('1fLdwO1JAYL7WEnwuTm5srHCqwCOhwm6d8ds6RvT00Tw', 4)
             //console.log(seriesDataSets);
             Highcharts.objectEach(
                 seriesDataSets,
-                (data, name) => chart.addSeries({ name, data })
+                (data, name) => {
+                    chart.addSeries({ name, data })
+                }
             )
         }
     )
