@@ -94,6 +94,7 @@ const chart = Highcharts.chart("container", {
         },
     },
     data: {
+        ...defaultOptions.data,
         googleSpreadsheetKey: spreadsheet,
         googleSpreadsheetWorksheet: spreadSheetKey,
         parsed: (data) => {

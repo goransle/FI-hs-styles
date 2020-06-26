@@ -69,6 +69,10 @@ export default {
       }
     }
   },
+  data:{
+    enablePolling: params.get('polling') || false,
+    dataRefreshRate: params.get('pollingRate') || 1
+  },
   defs: {
     glow: {
       tagName: 'filter',

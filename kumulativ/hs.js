@@ -28,6 +28,7 @@ const chart = Highcharts.chart("container", {
     }
   },
   data: {
+    ...defaultOptions.data,
     googleSpreadsheetKey: spreadsheet,
     googleSpreadsheetWorksheet: spreadSheetKey, // fane nr 1
     switchRowsAndColumns: true,
