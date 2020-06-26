@@ -135,6 +135,9 @@ const chart = Highcharts.chart(
                 display: 'none'
             }
         },
+        legend: {
+
+        },
         plotOptions: {
             
             packedbubble: {
