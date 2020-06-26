@@ -152,8 +152,8 @@ const chart = Highcharts.chart(
                     formatter: function() {
                         var label = this.point.name;
                         var labelLength = this.point.name.length;
-                        if(labelLength > 6) {
-                            var twoLines = label.slice(0,6) + label.slice(6, labelLength).replace(/\s/g, '<br>');
+                        if(labelLength > 3) {
+                            var twoLines = label.slice(0,3) + label.slice(3, labelLength).replace(/\s/g, '<br>');
                             return  twoLines;
                         } else {
                             return this.point.name;
@@ -174,13 +174,11 @@ const chart = Highcharts.chart(
 fetchSheet('1fLdwO1JAYL7WEnwuTm5srHCqwCOhwm6d8ds6RvT00Tw', 4)
     .then(
         seriesDataSets => {
-            //console.log(seriesDataSets);
             Highcharts.objectEach(
                 seriesDataSets,
-                (data, name) => {
-                    chart.addSeries({ name, data })
-                }
+                (data, name) => chart.addSeries({ name, data }),
             )
+            
         }
     )
     .catch(
