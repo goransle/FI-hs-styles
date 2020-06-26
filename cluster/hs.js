@@ -4,6 +4,7 @@ import 'https://code.highcharts.com/es-modules/masters/modules/data.src.js';
 import 'https://code.highcharts.com/es-modules/masters/modules/exporting.src.js'
 import 'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'
 import defaultOptions from '../js/defaultOptions.js';
+import setImages from '../js/setImages.js'
 
 let title = '';
 
@@ -122,6 +123,7 @@ const chart = Highcharts.chart(
                         }, params.get('cycleSpeed') || 2000);
                     }
                     chart.setTitle({text: title})
+                    setImages();
                 }
             }
         },
