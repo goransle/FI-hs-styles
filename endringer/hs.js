@@ -1,6 +1,7 @@
 import Highcharts from 'https://code.highcharts.com/es-modules/masters/highcharts.src.js'
 import 'https://code.highcharts.com/es-modules/masters/modules/stock.src.js'
 import 'https://code.highcharts.com/es-modules/masters/modules/data.src.js'
+import 'https://code.highcharts.com/es-modules/masters/modules/exporting.src.js'
 import defaultOptions from '../js/defaultOptions.js';
 import setImages from '../js/setImages.js';
 

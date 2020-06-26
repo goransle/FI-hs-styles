@@ -3,6 +3,7 @@ import 'https://code.highcharts.com/es-modules/masters/highcharts-more.src.js';
 import 'https://code.highcharts.com/es-modules/masters/modules/data.src.js';
 import 'https://code.highcharts.com/es-modules/masters/modules/exporting.src.js'
 import 'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'
+import defaultOptions from '../js/defaultOptions.js';
 
 let title = '';
 
@@ -167,7 +168,11 @@ const chart = Highcharts.chart(
                     width: '3px'
                 }
             }
-        },
+        }, // Plot options
+        //series :{},
+        exporting: {
+            ...defaultOptions.exporting
+        }
     }
 );
  
