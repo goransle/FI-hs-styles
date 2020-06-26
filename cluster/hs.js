@@ -78,8 +78,7 @@ const chart = Highcharts.chart(
         chart: {
             type: 'packedbubble',
             events: {
-                addSeries: function () {
-
+                addSeries: function () {     
                     const seriesArray = chart.series;
                     var timesRun = 0;
 
@@ -143,8 +142,19 @@ const chart = Highcharts.chart(
                     gravitationalConstant: 0.02
                 },
                 dataLabels: {
+                    useHTML: true,
                     enabled: true,
-                    format: '{point.name}',
+                    //format: '{point.name}',
+                    formatter: function() {
+                        var label = this.point.name;
+                        var labelLength = this.point.name.length;
+                        if(labelLength > 6) {
+                            var twoLines = label.slice(0,6) + label.slice(6, labelLength).replace(/\s/g, '<br>');
+                            return  twoLines;
+                        } else {
+                            return this.point.name;
+                        }
+                    }
                 },
                 style: {
                     color: 'black',
@@ -153,8 +163,7 @@ const chart = Highcharts.chart(
                     width: '3px'
                 }
             }
-        }, // Plot options
-        //series :{},
+        },
     }
 );
  
