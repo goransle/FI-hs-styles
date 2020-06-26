@@ -5,6 +5,8 @@ import 'https://code.highcharts.com/es-modules/masters/modules/exporting.src.js'
 import 'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'
 import defaultOptions from '../js/defaultOptions.js';
 
+let title = '';
+
 async function fetchSheet(googleSpreadsheetKey, worksheet) {
     var url = [
         'https://spreadsheets.google.com/feeds/cells',
@@ -44,6 +46,7 @@ async function fetchSheet(googleSpreadsheetKey, worksheet) {
                 data.forEach((row, index) => {
 
                     if (index <= 1) {
+                        title = data[1][1];
                         return;
                     }
 
@@ -79,8 +82,7 @@ const chart = Highcharts.chart(
         chart: {
             type: 'packedbubble',
             events: {
-                addSeries: function () {
-
+                addSeries: function () {     
                     const seriesArray = chart.series;
                     var timesRun = 0;
 
@@ -119,11 +121,12 @@ const chart = Highcharts.chart(
                             }
                         }, params.get('cycleSpeed') || 2000);
                     }
+                    chart.setTitle({text: title})
                 }
             }
         },
         title: {
-            text: 'Medlemmar i clusteret'
+            text: title
         },
         //colors: ['#F0F', '#0F0', 'blue', 'pink','yellow'],
         // tooltip are turned off, the information is only valuable due to bubble sizes
@@ -144,8 +147,19 @@ const chart = Highcharts.chart(
                     gravitationalConstant: 0.02
                 },
                 dataLabels: {
+                    useHTML: true,
                     enabled: true,
-                    format: '{point.name}',
+                    //format: '{point.name}',
+                    formatter: function() {
+                        var label = this.point.name;
+                        var labelLength = this.point.name.length;
+                        if(labelLength > 3) {
+                            var twoLines = label.slice(0,3) + label.slice(3, labelLength).replace(/\s/g, '<br>');
+                            return  twoLines;
+                        } else {
+                            return this.point.name;
+                        }
+                    }
                 },
                 style: {
                     color: 'black',
@@ -165,11 +179,11 @@ const chart = Highcharts.chart(
 fetchSheet('1fLdwO1JAYL7WEnwuTm5srHCqwCOhwm6d8ds6RvT00Tw', 4)
     .then(
         seriesDataSets => {
-            //console.log(seriesDataSets);
             Highcharts.objectEach(
                 seriesDataSets,
-                (data, name) => chart.addSeries({ name, data })
+                (data, name) => chart.addSeries({ name, data }),
             )
+            
         }
     )
     .catch(
