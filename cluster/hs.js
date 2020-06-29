@@ -98,8 +98,6 @@ fetchSheet(spreadsheet, spreadSheetKey || 4)
                             addSeries: function () {
                                 const seriesArray = chart.series;
                                 var timesRun = 0;
-
-                                const params = new URLSearchParams(window.location.search);
                                 if (params.get('cycle') && !hoverFx) {
 
                                     hoverFx = window.setInterval(function () {
@@ -137,7 +135,8 @@ fetchSheet(spreadsheet, spreadSheetKey || 4)
                                 chart.setTitle({ text: title })
                                 setImages();
                             }
-                        }
+                        },
+                        styledMode: true
                     },
                     credits: {
                         enabled: false
@@ -149,6 +148,7 @@ fetchSheet(spreadsheet, spreadSheetKey || 4)
                     //colors: ['#F0F', '#0F0', 'blue', 'pink','yellow'],
                     // tooltip are turned off, the information is only valuable due to bubble sizes
                     tooltip: {
+                        enabled: false,
                         style: {
                             display: 'none'
                         }
