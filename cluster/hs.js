@@ -127,6 +127,9 @@ const chart = Highcharts.chart(
                 }
             }
         },
+        credits: {
+            enabled: false
+        },
         title: {
             text: title
         },
@@ -137,23 +140,25 @@ const chart = Highcharts.chart(
                 display: 'none'
             }
         },
-        legend: {
-
-        },
         plotOptions: {
-            
             packedbubble: {
-                minSize: '10%',
-                maxSize: '200%',
+                minSize: '20%',
+                maxSize: '250%',
                 zMin: 0,
                 zMax: 100,
                 layoutAlgorithm: {
                     splitSeries: false,
-                    gravitationalConstant: 0.02
+                    gravitationalConstant: 0.02,
+                    bubblePadding: 2
                 },
                 dataLabels: {
                     useHTML: true,
                     enabled: true,
+                    style:{
+                        fontSize: '14px',
+                        fontWeight: '700',
+                        textOutline: '0'
+                    },
                     //format: '{point.name}',
                     formatter: function() {
                         var label = this.point.name;

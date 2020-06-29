@@ -468,53 +468,7 @@ text.highcharts-data-label {
 }
 
 /* Legend */
-.highcharts-legend-box {
-  fill: none;
-  stroke-width: 0;
-}
-.highcharts-legend-item > text {
-  fill: $neutral-color-80;
-  font-weight: bold;
-  font-size: $legend-font-size;
-  cursor: pointer;
-  stroke-width: 0;
-}
-.highcharts-legend-item:hover text {
-  fill: $neutral-color-100;
-}
-.highcharts-legend-item-hidden * {
-  fill: $neutral-color-20 !important;
-  stroke: $neutral-color-20 !important;
-  transition: fill 250ms;
-}
-.highcharts-legend-nav-active {
-  fill: $highlight-color-100;
-  cursor: pointer;
-}
-.highcharts-legend-nav-inactive {
-  fill: $neutral-color-20;
-}
-circle.highcharts-legend-nav-active,
-circle.highcharts-legend-nav-inactive {
-  /* tracker */
-  fill: rgba(192, 192, 192, 0.0001);
-}
-.highcharts-legend-title-box {
-  fill: none;
-  stroke-width: 0;
-}
-
-/* Bubble legend */
-.highcharts-bubble-legend-symbol {
-  stroke-width: 2;
-  fill-opacity: 0.5;
-}
-.highcharts-bubble-legend-connectors {
-  stroke-width: 1;
-}
-.highcharts-bubble-legend-labels {
-  fill: $neutral-color-80;
-}
+@include base.legend;
 
 /* Loading */
 .highcharts-loading {

@@ -73,7 +73,7 @@
   $font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !default;
   $title-font-size: 3em !default;
   $subtitle-font-size: 1em !default;
-  $legend-font-size: 1em !default;
+  $legend-font-size: 1.2em !default;
   $axis-labels-font-size: 1em !default;
   
   // Tooltip
@@ -489,6 +489,7 @@
       fill: none !important;
   }
   
+  @mixin legend {
   /* Legend */
   .highcharts-legend-box {
       fill: none;
@@ -524,6 +525,7 @@
       stroke-width: 0;
   }
   
+  
   /* Bubble legend */
   .highcharts-bubble-legend-symbol {
       stroke-width: 2;
@@ -535,6 +537,7 @@
   .highcharts-bubble-legend-labels {
       fill: $neutral-color-80;
   }
+}
   
   /* Loading */
   .highcharts-loading {
