@@ -435,7 +435,7 @@ text.highcharts-data-label {
 }
 
 /* Legend */
-@include base.legend;
+@include base.legend($neutral-color-80, white);
 .highcharts-legend-item.highcharts-packedbubble-series text{
   color: white !important;
   fill: white !important;

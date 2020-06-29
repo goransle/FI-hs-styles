@@ -489,21 +489,21 @@
       fill: none !important;
   }
   
-  @mixin legend {
+  @mixin legend ($textColor: $neutral-color-80, $hoverColor: $neutral-color-100) {
   /* Legend */
   .highcharts-legend-box {
       fill: none;
       stroke-width: 0;
   }
   .highcharts-legend-item > text {
-      fill: $neutral-color-80;
+      fill: $textColor;
       font-weight: bold;
       font-size: $legend-font-size;
       cursor: pointer;
       stroke-width: 0;
   }
   .highcharts-legend-item:hover text {
-      fill: $neutral-color-100;
+      fill: $hoverColor;
   }
   .highcharts-legend-item-hidden * {
       fill: $neutral-color-20 !important;
@@ -535,7 +535,7 @@
       stroke-width: 1;
   }
   .highcharts-bubble-legend-labels {
-      fill: $neutral-color-80;
+      fill: $textColor;
   }
 }
   

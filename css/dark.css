@@ -1389,7 +1389,7 @@ text.highcharts-data-label {
 }
 
 .highcharts-legend-item > text {
-  fill: #000000;
+  fill: var(--color-t);
   font-weight: bold;
   font-size: 1.2em;
   cursor: pointer;
@@ -1397,7 +1397,7 @@ text.highcharts-data-label {
 }
 
 .highcharts-legend-item:hover text {
-  fill: #000000;
+  fill: white;
 }
 
 .highcharts-legend-item-hidden * {
@@ -1436,7 +1436,7 @@ circle.highcharts-legend-nav-active, circle.highcharts-legend-nav-inactive {
 }
 
 .highcharts-bubble-legend-labels {
-  fill: #000000;
+  fill: var(--color-t);
 }
 
 .highcharts-legend-item.highcharts-packedbubble-series text {
