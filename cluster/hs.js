@@ -6,7 +6,13 @@ import 'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'
 import defaultOptions from '../js/defaultOptions.js';
 import setImages from '../js/setImages.js'
 
+const params = new URLSearchParams(window.location.search);
+const spreadsheet = params.get("spreadsheetID") || '1fLdwO1JAYL7WEnwuTm5srHCqwCOhwm6d8ds6RvT00Tw';
+const spreadSheetKey = params.get("spreadsheetKey") || 4;
+
 let title = '';
+
+let highestValue = 0;
 
 async function fetchSheet(googleSpreadsheetKey, worksheet) {
     var url = [
@@ -15,7 +21,7 @@ async function fetchSheet(googleSpreadsheetKey, worksheet) {
         worksheet,
         'public/values?alt=json'
     ].join('/');
-  
+
     return new Promise((resolve, reject) => {
         Highcharts.ajax({
             url: url,
@@ -59,6 +65,8 @@ async function fetchSheet(googleSpreadsheetKey, worksheet) {
                         name: row[1],
                         value: row[2]
                     });
+                    console.log(row[2])
+                    if (+row[2] > highestValue) highestValue = +row[2]
 
                 });
 
@@ -77,123 +85,122 @@ async function fetchSheet(googleSpreadsheetKey, worksheet) {
 }
 
 let hoverFx;
-const chart = Highcharts.chart(
-    'container',
-    {
-        chart: {
-            type: 'packedbubble',
-            events: {
-                addSeries: function () {     
-                    const seriesArray = chart.series;
-                    var timesRun = 0;
 
-                    const params = new URLSearchParams(window.location.search);
-                    if (params.get('cycle') && !hoverFx) {
-                        
-                        hoverFx = window.setInterval(function () {
-
-                            if (!seriesArray.length) {
-                                return;
-                            }
-
-                            let hoverSeries = (
-                                chart.hoverPoint && chart.hoverPoint.series ||
-                                chart.hoverSeries
-                            );
-
-                            if (hoverSeries) {
-                                hoverSeries.points[0].onMouseOut();
-                            }
-
-                            if (!hoverSeries || hoverSeries.index >= (seriesArray.length - 1)) {
-                                hoverSeries = seriesArray[0];
-                            } else {
-                                hoverSeries = seriesArray[hoverSeries.index + 1];
-                            }
-
-                            hoverSeries.points[0].onMouseOver();
-
-                            // A this if stops the infinite hovering after ca. 120 seconds.
-                            // Can be deleted if infinite hovering is wanted.
-                            timesRun++;
-                            if(timesRun === 60) {
-                                hoverSeries.onMouseOut();
-                                clearInterval(hoverFx)
-                            }
-                        }, params.get('cycleSpeed') || 2000);
-                    }
-                    chart.setTitle({text: title})
-                    setImages();
-                }
-            }
-        },
-        credits: {
-            enabled: false
-        },
-        title: {
-            text: title
-        },
-        //colors: ['#F0F', '#0F0', 'blue', 'pink','yellow'],
-        // tooltip are turned off, the information is only valuable due to bubble sizes
-        tooltip: {
-            style: {
-                display: 'none'
-            }
-        },
-        plotOptions: {
-            packedbubble: {
-                minSize: '20%',
-                maxSize: '250%',
-                zMin: 0,
-                zMax: 100,
-                layoutAlgorithm: {
-                    splitSeries: false,
-                    gravitationalConstant: 0.02,
-                    bubblePadding: 2
-                },
-                dataLabels: {
-                    useHTML: true,
-                    enabled: true,
-                    style:{
-                        fontSize: '14px',
-                        fontWeight: '700',
-                        textOutline: '0'
-                    },
-                    //format: '{point.name}',
-                    formatter: function() {
-                        var label = this.point.name;
-                        var labelLength = this.point.name.length;
-                        if(labelLength > 3) {
-                            var twoLines = label.slice(0,3) + label.slice(3, labelLength).replace(/\s/g, '<br>');
-                            return  twoLines;
-                        } else {
-                            return this.point.name;
-                        }
-                    }
-                },
-                style: {
-                    color: 'black',
-                    textOutline: 'none',
-                    fontWeight: 'normal',
-                    width: '3px'
-                }
-            }
-        }, // Plot options
-        //series :{},
-        exporting: {
-            ...defaultOptions.exporting
-        }
-    }
-);
- 
-fetchSheet('1fLdwO1JAYL7WEnwuTm5srHCqwCOhwm6d8ds6RvT00Tw', 4)
+fetchSheet(spreadsheet, spreadSheetKey || 4)
     .then(
         seriesDataSets => {
+            const chart = Highcharts.chart(
+                'container',
+                {
+                    chart: {
+                        type: 'packedbubble',
+                        events: {
+                            addSeries: function () {
+                                const seriesArray = chart.series;
+                                var timesRun = 0;
+
+                                const params = new URLSearchParams(window.location.search);
+                                if (params.get('cycle') && !hoverFx) {
+
+                                    hoverFx = window.setInterval(function () {
+
+                                        if (!seriesArray.length) {
+                                            return;
+                                        }
+
+                                        let hoverSeries = (
+                                            chart.hoverPoint && chart.hoverPoint.series ||
+                                            chart.hoverSeries
+                                        );
+
+                                        if (hoverSeries) {
+                                            hoverSeries.points[0].onMouseOut();
+                                        }
+
+                                        if (!hoverSeries || hoverSeries.index >= (seriesArray.length - 1)) {
+                                            hoverSeries = seriesArray[0];
+                                        } else {
+                                            hoverSeries = seriesArray[hoverSeries.index + 1];
+                                        }
+
+                                        hoverSeries.points[0].onMouseOver();
+
+                                        // A this if stops the infinite hovering after ca. 120 seconds.
+                                        // Can be deleted if infinite hovering is wanted.
+                                        timesRun++;
+                                        if (timesRun === 60) {
+                                            hoverSeries.onMouseOut();
+                                            clearInterval(hoverFx)
+                                        }
+                                    }, params.get('cycleSpeed') || 2000);
+                                }
+                                chart.setTitle({ text: title })
+                                setImages();
+                            }
+                        }
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    title: {
+                        text: title
+                    },
+                    //colors: ['#F0F', '#0F0', 'blue', 'pink','yellow'],
+                    // tooltip are turned off, the information is only valuable due to bubble sizes
+                    tooltip: {
+                        style: {
+                            display: 'none'
+                        }
+                    },
+                    plotOptions: {
+                        packedbubble: {
+                            minSize: '20%',
+                            maxSize: '250%',
+                            zMin: 0,
+                            zMax: highestValue * 3,
+                            layoutAlgorithm: {
+                                splitSeries: false,
+                                gravitationalConstant: 0.02,
+                                bubblePadding: 2
+                            },
+                            dataLabels: {
+                                useHTML: true,
+                                enabled: true,
+                                style: {
+                                    fontSize: '14px',
+                                    fontWeight: '700',
+                                    textOutline: '0'
+                                },
+                                //format: '{point.name}',
+                                formatter: function () {
+                                    var label = this.point.name;
+                                    var labelLength = this.point.name.length;
+                                    if (labelLength > 3) {
+                                        var twoLines = label.slice(0, 3) + label.slice(3, labelLength).replace(/\s/g, '<br>');
+                                        return twoLines;
+                                    } else {
+                                        return this.point.name;
+                                    }
+                                }
+                            },
+                            style: {
+                                color: 'black',
+                                textOutline: 'none',
+                                fontWeight: 'normal',
+                                width: '3px'
+                            }
+                        }
+                    }, // Plot options
+                    //series :{},
+                    exporting: {
+                        ...defaultOptions.exporting
+                    }
+                }
+            );
             Highcharts.objectEach(
                 seriesDataSets,
                 (data, name) => chart.addSeries({ name, data }),
             )
-            
         }
     )
     .catch(
