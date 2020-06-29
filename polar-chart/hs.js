@@ -80,7 +80,7 @@ const chart = Highcharts.chart("container", {
         endOnTick: true,
         showLastLabel: true,
         labels:{
-           style:{
+            style:{
                color: 'white'
            }
         }
