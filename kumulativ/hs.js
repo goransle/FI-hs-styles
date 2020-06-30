@@ -13,10 +13,10 @@ const chart = Highcharts.chart("container", {
   tooltip:{
     ...defaultOptions.tooltip,
     formatter: function () {
-      console.log(this)
-      const originalData = this.series.chart.originalData[this.series.index].sort((a,b) => a[1] - b[1])
-      console.log(originalData)
-      const min = originalData[0][1], max = originalData[originalData.length - 1][1];
+      //console.log(this)
+      const originalData = this.series.chart.data.columns[this.series.index + 1].sort((a,b) => a - b)
+      //console.log(originalData)
+      const min = originalData[0], max = originalData[originalData.length - 1];
       const total = this.series.dataMax;
       const avg = total / this.series.processedYData.length;
       return `${this.series.name}<br>
@@ -38,6 +38,8 @@ const chart = Highcharts.chart("container", {
         // Add the previous years data
         if(!chart.originalData) chart.originalData = [];
         chart.originalData.push(s.data)
+
+        ogData = s.data;
         s.data = s.data.map((d, i, arr) => {
           if (i > 0) d[1] += arr[i - 1][1];
           return d;
