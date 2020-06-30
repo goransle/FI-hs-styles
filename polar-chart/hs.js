@@ -61,6 +61,7 @@ const chart = Highcharts.chart("container", {
             useHTML: true,
             allowOverlap: true,
             step: 1,
+            x: -20,
             y: 3,
             style: {
                 fontSize: '13px',
@@ -81,6 +82,7 @@ const chart = Highcharts.chart("container", {
         showLastLabel: true,
         labels:{
             y: 7,
+            distance: 30,
             style:{
                color: 'white'
            }
