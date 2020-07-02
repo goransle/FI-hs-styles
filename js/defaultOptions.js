@@ -35,6 +35,9 @@ export default {
     },
     shape: 'square'
   },
+  legend:{
+    enabled: params.has('legend') ? (params.get('legend') === 'false' ? false : true) : true
+  },
   exporting: {
     enabled: params.get('exporting') || false,
     sourceWidth: 1920,

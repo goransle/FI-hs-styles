@@ -34,9 +34,6 @@ const chart = Highcharts.stockChart("container", {
       }
     }
   },
-  legend:{
-    enabled: true
-  },
   tooltip: {
     pointFormat: '<span>{series.name}</span>: <b>{point.y}</b> ({point.change}%)<br/>',
     valueDecimals: 2,

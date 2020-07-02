@@ -145,6 +145,9 @@ fetchSheet(spreadsheet, spreadSheetKey || 4)
                         text: title,
                         y: 50
                     },
+                    legend: {
+                        ...defaultOptions.legend
+                    },
                     //colors: ['#F0F', '#0F0', 'blue', 'pink','yellow'],
                     // tooltip are turned off, the information is only valuable due to bubble sizes
                     tooltip: {
