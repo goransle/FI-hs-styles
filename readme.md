@@ -14,5 +14,6 @@ Parameter  | Verdier | Beskrivelse
 **spreadsheetID** | Google spreadsheets ID | Finnes i URLen til et delt Google regneark. F.eks `1fLdwO1JAYL7WEnwuTm5srHCqwCOhwm6d8ds6RvT00Tw`. Regnearket må vere publisert for at dette skal fungere.
 **spreadsheetKey** | tall (1...n) | Hvilken fane i regnearket charten skal hente data fra.
 **exporting** | `true` <br> `false` | Om `true`, så vises eksport-menyen, som lar ein laste ned charten i forskjellige bilde-format.
+**legend** | `true` <br> `false` | Om satt til `false` så blir legend slått av.
 **polling** | `true` <br> `false` | Skrur på automatisk innhenting av data
 **pollingRate** | tall | antall sekunder mellom innhenting av data

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>URL-parametere</title>
+        <style>
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        
+        
+        
+    </head>
+    <body class="vscode-light">
+        <h1 id="url-parametere">URL-parametere</h1>
+<p>Chartene kan endres på med å sette forskjellige URL-parametere. For eksempel kan ein bytte tema med å legge til <code>?theme=light</code> i URLen.</p>
+<p>Om ein vil bytte rekneark kan ein legge til <code>?spreadsheetID=1fLdwO1JAYL7WEnwuTm5srHCqwCOhwm6d8ds6RvT00Tw&amp;spreadsheetKey=2</code></p>
+<h2 id="oversikt-over-parametere">Oversikt over parametere</h2>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Verdier</th>
+<th>Beskrivelse</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>theme</strong></td>
+<td><code>dark</code> <br> <code>light</code></td>
+<td>Bytter fargetema.</td>
+</tr>
+<tr>
+<td><strong>cycle</strong></td>
+<td><code>true</code> <br> <code>false</code></td>
+<td>&quot;Cycler&quot; gjennom serier i grafen. Om det kun er en serie vil den gå gjennom hvert punkt i serien.</td>
+</tr>
+<tr>
+<td><strong>cycleSpeed</strong></td>
+<td>tall</td>
+<td>Antall millisekunder før &quot;cycle&quot;-funksjonen går til neste serie/punkt.</td>
+</tr>
+<tr>
+<td><strong>spreadsheetID</strong></td>
+<td>Google spreadsheets ID</td>
+<td>Finnes i URLen til et delt Google regneark. F.eks <code>1fLdwO1JAYL7WEnwuTm5srHCqwCOhwm6d8ds6RvT00Tw</code>. Regnearket må vere publisert for at dette skal fungere.</td>
+</tr>
+<tr>
+<td><strong>spreadsheetKey</strong></td>
+<td>tall (1...n)</td>
+<td>Hvilken fane i regnearket charten skal hente data fra.</td>
+</tr>
+<tr>
+<td><strong>exporting</strong></td>
+<td><code>true</code> <br> <code>false</code></td>
+<td>Om <code>true</code>, så vises eksport-menyen, som lar ein laste ned charten i forskjellige bilde-format.</td>
+</tr>
+<tr>
+<td><strong>legend</strong></td>
+<td><code>true</code> <br> <code>false</code></td>
+<td>Om satt til <code>false</code> så blir legend slått av.</td>
+</tr>
+<tr>
+<td><strong>polling</strong></td>
+<td><code>true</code> <br> <code>false</code></td>
+<td>Skrur på automatisk innhenting av data</td>
+</tr>
+<tr>
+<td><strong>pollingRate</strong></td>
+<td>tall</td>
+<td>antall sekunder mellom innhenting av data</td>
+</tr>
+</tbody>
+</table>
+
+    </body>
+    </html>
