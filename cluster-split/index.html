@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Innovation charts</title>
+    <link rel="stylesheet" href="../css/dark.css">
+    <style>
+        #container{
+            height: 100vh;
+            width: 100vw;
+            padding: 0;
+        }
+        .highcharts-label span {
+            text-align: center;
+            color: white !important;
+            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+
+        }
+        .highcharts-graph{
+            display: none;
+        }
+        #FI-branding {
+            width: 20%;
+            position: absolute;
+            z-index: 100;
+            top: 5%;
+            left: 1%;
+            background-repeat: no-repeat;
+        }
+        .highcharts-title {
+            margin-top: 20px !important;
+            fill: #fafdff !important;
+            font-size: 3em !important;
+            font-weight: 700 !important;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+        .highcharts-parentNode{
+            fill-opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+    <div id="FI-branding" style="display: none;">
+        <img src="../NCE_Finance_Innovation_logo_NCE_negative_rgb.svg" alt="">
+    </div>
+    <div id="hc-branding" style="display: none;">
+        <img src="../highcharts-logo.svg" alt="">
+    </div>
+    <button id="themeswitcher-button">Bytt tema</button>
+    <form>
+        <input type="text" name="" id="spreadSheetID">
+        <input type="number" name="" id="spreadSheetKey">
+        <button id ="spreadSheetSwitcherButton">Bytt regneark</button>
+    </form>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/data.js"></script>
+    <script type="module" src="hs.js"></script>
+    <script type="module">
+        import themeswitcher from "../js/themeswitcher.js";
+        import '../js/switcherButton.js';
+        themeswitcher("#themeswitcher-button");
+    </script>
+</body>
+</html>
