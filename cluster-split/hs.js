@@ -159,18 +159,20 @@ fetchSheet(spreadsheet, spreadSheetKey || 4)
                     plotOptions: {
                         packedbubble: {
                             minSize: '20%',
-                            maxSize: '150%',
+                            maxSize: '175%',
                             zMin: 0,
-                            zMax: highestValue * 2,
+                            zMax: highestValue * 2.5,
                             layoutAlgorithm: {
                                 splitSeries: true,
                                 //integration: 'euler',
-                                //gravitationalConstant: 0.02,
-                               // bubblePadding: 2,
+                                gravitationalConstant: 0.35,
+                                //bubblePadding: 10,
                                 //initialPositions: 'random',
-                                //enableSimulation: false
+                                //enableSimulation: false,
                                 //maxSpeed: 10,
-                                //friction: -1
+                                friction: -0.5,
+                                parentNodeLimit: true,
+                                maxIterations: 2000
                             },
                             dataLabels: {
                                 useHTML: true,
