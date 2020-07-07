@@ -84,7 +84,7 @@ async function fetchSheet(googleSpreadsheetKey, worksheet) {
     });
 }
 
-let hoverFx;
+let hoverFx = [];
 
 fetchSheet(spreadsheet, spreadSheetKey || 4)
     .then(
@@ -95,43 +95,7 @@ fetchSheet(spreadsheet, spreadSheetKey || 4)
                     chart: {
                         type: 'packedbubble',
                         events: {
-                            addSeries: function () {
-                                const seriesArray = chart.series;
-                                var timesRun = 0;
-                                if (params.get('cycle') && !hoverFx) {
-
-                                    hoverFx = window.setInterval(function () {
-
-                                        if (!seriesArray.length) {
-                                            return;
-                                        }
-
-                                        let hoverSeries = (
-                                            chart.hoverPoint && chart.hoverPoint.series ||
-                                            chart.hoverSeries
-                                        );
-
-                                        if (hoverSeries) {
-                                            hoverSeries.points[0].onMouseOut();
-                                        }
-
-                                        if (!hoverSeries || hoverSeries.index >= (seriesArray.length - 1)) {
-                                            hoverSeries = seriesArray[0];
-                                        } else {
-                                            hoverSeries = seriesArray[hoverSeries.index + 1];
-                                        }
-
-                                        hoverSeries.points[0].onMouseOver();
-
-                                        // A this if stops the infinite hovering after ca. 120 seconds.
-                                        // Can be deleted if infinite hovering is wanted.
-                                        timesRun++;
-                                        if (timesRun === 60) {
-                                            hoverSeries.onMouseOut();
-                                            clearInterval(hoverFx)
-                                        }
-                                    }, params.get('cycleSpeed') || 2000);
-                                }
+                            afterAddSeries: function (e) {
                                 chart.setTitle({ text: title })
                                 setImages();
                             }
@@ -161,18 +125,20 @@ fetchSheet(spreadsheet, spreadSheetKey || 4)
                             minSize: '20%',
                             maxSize: '175%',
                             zMin: 0,
-                            zMax: highestValue * 2.5,
+                            zMax: highestValue * 2,
+                            stacking: 'percent',
                             layoutAlgorithm: {
                                 splitSeries: true,
                                 //integration: 'euler',
-                                gravitationalConstant: 0.35,
+                                gravitationalConstant: 0.3,
                                 //bubblePadding: 10,
                                 //initialPositions: 'random',
                                 //enableSimulation: false,
                                 //maxSpeed: 10,
                                 friction: -0.5,
                                 parentNodeLimit: true,
-                                maxIterations: 2000
+                                maxIterations: 2000,
+                                initialPositionRadius: 1000
                             },
                             dataLabels: {
                                 useHTML: true,
@@ -210,11 +176,10 @@ fetchSheet(spreadsheet, spreadSheetKey || 4)
             );
 
             Object.keys(seriesDataSets).forEach((key, i) => {
-                    //setTimeout(() => {
-                        chart.addSeries({ name: key, data: seriesDataSets[key] }) 
-                    //}, i * 500);
-                }
-            )
+                let shouldRedraw = false;
+                if (i === Object.keys(seriesDataSets).length - 1) shouldRedraw = true
+                chart.addSeries({ name: key, data: seriesDataSets[key] }, shouldRedraw, true);
+            })
         }
     )
     .catch(
